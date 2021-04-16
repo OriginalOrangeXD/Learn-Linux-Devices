@@ -1,0 +1,1 @@
+cmd_/root/makingDrivers/not-a-rootkit/scriptKiddieRootkit.ko := ld -r -m elf_x86_64 --build-id=sha1  -T scripts/module.lds -o /root/makingDrivers/not-a-rootkit/scriptKiddieRootkit.ko /root/makingDrivers/not-a-rootkit/scriptKiddieRootkit.o /root/makingDrivers/not-a-rootkit/scriptKiddieRootkit.mod.o;  true

