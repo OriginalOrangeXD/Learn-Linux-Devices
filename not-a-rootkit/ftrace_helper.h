@@ -5,6 +5,7 @@
  * */
 
 #include <linux/ftrace.h>
+#include <linux/kprobes.h>
 #include <linux/linkage.h>
 #include <linux/slab.h>
 #include <linux/uaccess.h>
@@ -58,6 +59,30 @@ struct ftrace_hook {
  * are going to hook. As before, we just use kallsyms_lookup_name() 
  * to find the address in kernel memory.
  * */
+/*
+static struct kprobe kp;
+
+unsigned long kprobe_lookup_name(const char *name)
+{
+	kp.symbol_name = name;
+
+	if(register_kprobe(&kp) < 0)
+		return 0;
+	unregister_kprobe(&kp);
+
+	return (unsigned long) kp.addr;
+}
+i*/
+static struct kprobe kp = {
+	    .symbol_name "kallsyms_lookup_name"
+};
+typedef unsigned long (*kallsyms_lookup_name_t)(const char *name);
+kallsyms_lookup_name_t kallsyms_lookup_name;
+
+register_kprobe(&kp);
+kallsyms_lookup_name(kallsyms_lookup_name_t) kp.addr;
+unregister_kprobe(&kp);
+
 static int fh_resolve_hook_address(struct ftrace_hook *hook)
 {
     hook->address = kallsyms_lookup_name(hook->name);
@@ -111,7 +136,7 @@ int fh_install_hook(struct ftrace_hook *hook)
      * (see USE_FENTRY_OFFSET). */
     hook->ops.func = fh_ftrace_thunk;
     hook->ops.flags = FTRACE_OPS_FL_SAVE_REGS
-            | FTRACE_OPS_FL_RECURSION_SAFE
+            | FTRACE_OPS_FL_RECURSION
             | FTRACE_OPS_FL_IPMODIFY;
 
     err = ftrace_set_filter_ip(&hook->ops, hook->address, 0, 0);

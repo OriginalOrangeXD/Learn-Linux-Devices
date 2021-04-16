@@ -300,4 +300,8 @@ scriptKiddieRootkit.o: \
  include/linux/kthread.h include/linux/cgroup_subsys.h \
  include/linux/security.h include/linux/kernel_read_file.h \
  include/generated/uapi/linux/version.h include/linux/namei.h \
- /root/makingDrivers/not-a-rootkit/ftrace_helper.h
+ /root/makingDrivers/not-a-rootkit/ftrace_helper.h \
+ include/linux/kprobes.h include/linux/freelist.h \
+ arch/x86/include/asm/kprobes.h include/asm-generic/kprobes.h \
+ arch/x86/include/asm/insn.h arch/x86/include/asm/inat.h \
+ arch/x86/include/asm/inat_types.h
