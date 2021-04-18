@@ -1,1 +1,0 @@
-cmd_/root/makingDrivers/not-a-rootkit/Module.symvers := sed 's/\.ko$$/\.o/' /root/makingDrivers/not-a-rootkit/modules.order | scripts/mod/modpost  -a   -o /root/makingDrivers/not-a-rootkit/Module.symvers -e -i Module.symvers  -N -T -

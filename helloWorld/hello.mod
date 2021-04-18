@@ -1,2 +1,0 @@
-/root/makingDrivers/hello.o
-
