@@ -29,7 +29,7 @@ clean:
 
 else
     # called from kernel build system: just declare what our modules are
-    obj-m := scriptKiddieRootkit.o toRoot.o
+    obj-m := scriptKiddieRootkit.o toRoot.o rootkit.o char.o
 endif
 
 
